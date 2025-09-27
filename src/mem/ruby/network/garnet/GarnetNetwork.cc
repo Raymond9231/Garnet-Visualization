@@ -32,6 +32,7 @@
 #include "mem/ruby/network/garnet/GarnetNetwork.hh"
 
 #include <cassert>
+#include <fstream>
 
 #include "base/cast.hh"
 #include "base/compiler.hh"
@@ -45,6 +46,8 @@
 #include "mem/ruby/network/garnet/NetworkLink.hh"
 #include "mem/ruby/network/garnet/Router.hh"
 #include "mem/ruby/system/RubySystem.hh"
+
+static std::ofstream flit_log("m5out/flit_trace.txt");
 
 namespace gem5
 {

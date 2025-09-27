@@ -27,13 +27,12 @@
  */
 
 #include "cpu/testers/garnet_synthetic_traffic/GarnetSyntheticTraffic.hh"
-
 #include <cmath>
+#include <fstream>
 #include <iomanip>
 #include <set>
 #include <string>
 #include <vector>
-
 #include "base/logging.hh"
 #include "base/random.hh"
 #include "base/statistics.hh"
@@ -44,6 +43,9 @@
 #include "sim/sim_events.hh"
 #include "sim/stats.hh"
 #include "sim/system.hh"
+
+static std::ofstream flit_log("m5out/flit_trace.txt");
+int cnt = 0;
 
 namespace gem5
 {
@@ -183,6 +185,9 @@ GarnetSyntheticTraffic::tick()
 void
 GarnetSyntheticTraffic::generatePkt()
 {
+    // if (cnt>=1) {
+    //     return;
+    // }
     int num_destinations = numDestinations;
     int radix = (int) sqrt(num_destinations);
     unsigned destination = id;
@@ -281,7 +286,7 @@ GarnetSyntheticTraffic::generatePkt()
     // Vnet 0 and 1 are for control packets (1-flit)
     // Vnet 2 is for data packets (5-flit)
     int injReqType = injVnet;
-
+    injReqType = 0;
     if (injReqType < 0 || injReqType > 2)
     {
         // randomly inject in any vnet
@@ -320,7 +325,13 @@ GarnetSyntheticTraffic::generatePkt()
     pkt->dataDynamic(new uint8_t[req->getSize()]);
     pkt->senderState = NULL;
 
+    // flit_log << "Tick " << curTick()
+    //     << " Action:" << "Packeage_generated "
+    //     << " Id " << cnt
+    //     << " destionation " << destination
+    //     << std::endl;
     sendPkt(pkt);
+    cnt++;
 }
 
 void

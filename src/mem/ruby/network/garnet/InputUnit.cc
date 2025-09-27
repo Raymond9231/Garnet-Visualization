@@ -31,9 +31,13 @@
 
 #include "mem/ruby/network/garnet/InputUnit.hh"
 
+#include <fstream>
+
 #include "debug/RubyNetwork.hh"
 #include "mem/ruby/network/garnet/Credit.hh"
 #include "mem/ruby/network/garnet/Router.hh"
+
+static std::ofstream flit_log("m5out/flit_trace_in.txt");
 
 namespace gem5
 {
@@ -83,6 +87,22 @@ InputUnit::wakeup()
         DPRINTF(RubyNetwork, "Router[%d] Consuming:%s Width: %d Flit:%s\n",
         m_router->get_id(), m_in_link->name(),
         m_router->getBitWidth(), *t_flit);
+
+        // flit_log << "Tick:" << curTick()
+        //     << " Action:" << "Input_unit"
+        //     << " FlitID:" << t_flit->get_id()
+        //     << " VC:" << t_flit->get_vc()
+        //     << " Router:" << m_router->get_id()
+        //     << std::endl;
+
+        flit_log << "Tick:" << curTick()
+             << " Action:InputUnit"
+             << " PackID:" << t_flit->getPacketID()
+             << " FlitIndex:" << t_flit->get_id()
+             << " Type:" << t_flit->get_type()
+             << " VC:" << t_flit->get_vc()
+             << " Router:" << m_router->get_id()
+             << std::endl;
         assert(t_flit->m_width == m_router->getBitWidth());
         int vc = t_flit->get_vc();
         t_flit->increment_hops(); // for stats

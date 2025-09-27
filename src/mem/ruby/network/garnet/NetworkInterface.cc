@@ -32,6 +32,9 @@
 
 #include "mem/ruby/network/garnet/NetworkInterface.hh"
 
+#include <fstream>
+
+static std::ofstream flit_log;
 #include <cassert>
 #include <cmath>
 
@@ -58,6 +61,13 @@ NetworkInterface::NetworkInterface(const Params &p)
     m_deadlock_threshold(p.garnet_deadlock_threshold),
     vc_busy_counter(m_virtual_networks, 0)
 {
+    if (!flit_log.is_open()) {
+    flit_log.open("m5out/flit_trace.txt", std::ios::out);
+    if (!flit_log.is_open()) {
+        panic("NetworkInterface: could not open m5out/
+            flit_trace.txt for writing\n");
+    }
+    }
     m_stall_count.resize(m_virtual_networks);
     niOutVcs.resize(0);
 }
@@ -385,6 +395,7 @@ NetworkInterface::flitisizeMessage(MsgPtr msg_ptr, int vnet)
         m_net_ptr->MessageSizeType_to_int(net_msg_ptr->getMessageSize()),
         vnet, oPort->bitWidth());
 
+    flit_log << " Try to inject now" <<std::endl;
     // loop to convert all multicast messages into unicast messages
     for (int ctr = 0; ctr < dest_nodes.size(); ctr++) {
 
@@ -437,6 +448,18 @@ NetworkInterface::flitisizeMessage(MsgPtr msg_ptr, int vnet)
         m_net_ptr->increment_injected_packets(vnet);
         m_net_ptr->update_traffic_distribution(route);
         int packet_id = m_net_ptr->getNextPacketID();
+
+        flit_log << "InjectPacket "
+            << "cycle=" << curTick()
+            << " pkt_id=" << packet_id
+            << " src_ni=" << route.src_ni
+            << " src_router=" << route.src_router
+            << " dest_ni=" << route.dest_ni
+            << " vnet=" << vnet
+            << " vc=" << vc
+            << " num_flits=" << num_flits
+            << std::endl;
+
         for (int i = 0; i < num_flits; i++) {
             m_net_ptr->increment_injected_flits(vnet);
             flit *fl = new flit(packet_id,
@@ -444,6 +467,16 @@ NetworkInterface::flitisizeMessage(MsgPtr msg_ptr, int vnet)
                 m_net_ptr->MessageSizeType_to_int(
                 net_msg_ptr->getMessageSize()),
                 oPort->bitWidth(), curTick());
+            flit_log << " Flit "
+                << "cycle=" << curTick()
+                << " pkt_id=" << packet_id
+                << " flit_idx=" << i
+                << " vc=" << vc
+                << " vnet=" << vnet
+                << " src_ni=" << route.src_ni
+                << " src_router=" << route.src_router
+                << " dest_ni=" << route.dest_ni
+                << std::endl;
 
             fl->set_src_delay(curTick() - msg_ptr->getTime());
             niOutVcs[vc].insert(fl);

@@ -28,12 +28,20 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
+using namespace std;
 #include "mem/ruby/network/garnet/CrossbarSwitch.hh"
+
+#include <fstream>
 
 #include "debug/RubyNetwork.hh"
 #include "mem/ruby/network/garnet/OutputUnit.hh"
 #include "mem/ruby/network/garnet/Router.hh"
+
+static std::ofstream flit_log("m5out/flit_trace_out.txt");
+
+#include <mutex>
+
+mutex log_mutex;
 
 namespace gem5
 {
@@ -82,6 +90,19 @@ CrossbarSwitch::wakeup()
             t_flit->advance_stage(LT_, m_router->clockEdge(Cycles(1)));
             t_flit->set_time(m_router->clockEdge(Cycles(1)));
 
+            std::unique_lock<std::mutex> lock(log_mutex);
+
+            flit_log << "Tick:" << curTick()
+                << " Action:" << "OutputFromRouter"
+                << " PackID:" << t_flit->getPacketID()
+                << " FlitIndex:" << t_flit->get_id()
+                << " Type:" << t_flit->get_type()
+                << " VC:" << t_flit->get_vc()
+                << " Router:" << m_router->get_id()
+                << " port:" << outport
+                << std::endl;
+
+            lock.unlock();
             // This will take care of waking up the Network Link
             // in the next cycle
             m_router->getOutputUnit(outport)->insert_flit(t_flit);
