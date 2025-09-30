@@ -80,7 +80,7 @@ class flit
     void set_src_delay(Tick delay) { src_delay = delay; }
     void set_dequeue_time(Tick time) { m_dequeue_time = time; }
     void set_enqueue_time(Tick time) { m_enqueue_time = time; }
-    
+
     void increment_hops() { m_route.hops_traversed++; }
     virtual void print(std::ostream& out) const;
 
@@ -97,7 +97,7 @@ class flit
         m_stage.first = t_stage;
         m_stage.second = newTime;
     }
-    
+
     static bool
     greater(flit* n1, flit* n2)
     {

@@ -25,20 +25,212 @@ gem5 is copyrighted software; use the --copyright option for details.
 
 gem5 version 22.1.0.0
 gem5 compiled Sep 29 2025 22:25:34
-gem5 started Sep 29 2025 23:54:12
-gem5 executing on MSI, pid 93758
-command line: ./build/NULL/gem5.debug configs/example/garnet_synth_traffic.py --num-cpus 16 --num-dirs 16 --network garnet --topology Mesh_XY --mesh-rows 4 --router-latency 1 --link-latency 1 --vcs-per-vnet 4 --link-width-bits 128 --sim-cycles 10000 --synthetic uniform_random --injectionrate 1.0 --single-sender-id 5 --single-dest-id 7 --num-packets-max 1 --inj-vnet 0
+gem5 started Sep 30 2025 10:36:04
+gem5 executing on MSI, pid 6937
+command line: ./build/NULL/gem5.debug configs/example/garnet_synth_traffic.py --num-cpus 16 --num-dirs 16 --network garnet --topology Mesh_XY --mesh-rows 4 --router-latency 1 --link-latency 1 --vcs-per-vnet 4 --link-width-bits 128 --sim-cycles 100000 --synthetic uniform_random --injectionrate 1.0 --single-sender-id 5 --single-dest-id 7 --num-packets-max 5 --inj-vnet 2
 
 Instantiate start!
 Simulation Start!
 build/NULL/sim/simulate.cc:192: info: Entering event queue @ 0.  Starting simulation...
 build/NULL/mem/ruby/system/Sequencer.cc:613: warn: Replacement policy updates recently became the responsibility of SLICC state machines. Make sure to setMRU() near callbacks in .sm files!
 ### 1500 RI 0 0 0 5 7
+### 2000 RI 1 0 1 5 7
 ### 2000 SI 0 0 0 5
+### 2500 SI 1 0 1 5
 ### 2500 RR 0 0 0 5
+### 2500 RI 6 1 0 5 7
+### 3000 RI 2 0 2 5 7
+### 3000 SI 6 1 0 5
+### 3000 RR 1 0 1 5
 ### 3000 ST 0 0 0 4
+### 3500 ST 1 0 1 4
 ### 3500 RR 0 0 0 6
+### 3500 RR 6 1 0 5
+### 3500 SI 2 0 2 5
+### 3500 RI 7 1 1 5 7
+### 4000 RI 14 2 0 5 7
+### 4000 SI 7 1 1 5
+### 4000 RR 2 0 2 5
+### 4000 ST 6 1 0 4
+### 4000 RR 1 0 1 6
 ### 4000 ST 0 0 0 5
+### 4500 ST 1 0 1 5
 ### 4500 RR 0 0 0 7
+### 4500 RR 6 1 0 6
+### 4500 ST 2 0 2 4
+### 4500 RR 7 1 1 5
+### 4500 SI 14 2 0 5
+### 4500 RI 24 3 0 5 7
+### 5000 RI 3 0 3 5 7
+### 5000 SI 24 3 0 5
+### 5000 RR 14 2 0 5
+### 5000 ST 7 1 1 4
+### 5000 RR 2 0 2 6
+### 5000 ST 6 1 0 5
+### 5000 RR 1 0 1 7
 ### 5000 SE 0 0 0 23
-Exiting @ tick 10000 because Network Tester completed simCycles
+### 5500 SE 1 0 1 23
+### 5500 RR 6 1 0 7
+### 5500 ST 2 0 2 5
+### 5500 RR 7 1 1 6
+### 5500 ST 14 2 0 4
+### 5500 RR 24 3 0 5
+### 5500 SI 3 0 3 5
+### 5500 RI 8 1 2 5 7
+### 6000 RI 15 2 1 5 7
+### 6000 SI 8 1 2 5
+### 6000 RR 3 0 3 5
+### 6000 ST 24 3 0 4
+### 6000 RR 14 2 0 6
+### 6000 ST 7 1 1 5
+### 6000 RR 2 0 2 7
+### 6000 SE 6 1 0 23
+### 6500 SE 2 0 2 23
+### 6500 RR 7 1 1 7
+### 6500 ST 14 2 0 5
+### 6500 RR 24 3 0 6
+### 6500 ST 3 0 3 4
+### 6500 RR 8 1 2 5
+### 6500 SI 15 2 1 5
+### 6500 RI 25 3 1 5 7
+### 7000 RI 4 0 4 5 7
+### 7000 SI 25 3 1 5
+### 7000 RR 15 2 1 5
+### 7000 ST 8 1 2 4
+### 7000 RR 3 0 3 6
+### 7000 ST 24 3 0 5
+### 7000 RR 14 2 0 7
+### 7000 SE 7 1 1 23
+### 7500 SE 14 2 0 23
+### 7500 RR 24 3 0 7
+### 7500 ST 3 0 3 5
+### 7500 RR 8 1 2 6
+### 7500 ST 15 2 1 4
+### 7500 RR 25 3 1 5
+### 7500 SI 4 0 4 5
+### 7500 RI 9 1 3 5 7
+### 8000 RI 16 2 2 5 7
+### 8000 SI 9 1 3 5
+### 8000 RR 4 0 4 5
+### 8000 ST 25 3 1 4
+### 8000 RR 15 2 1 6
+### 8000 ST 8 1 2 5
+### 8000 RR 3 0 3 7
+### 8000 SE 24 3 0 23
+### 8500 SE 3 0 3 23
+### 8500 RR 8 1 2 7
+### 8500 ST 15 2 1 5
+### 8500 RR 25 3 1 6
+### 8500 ST 4 0 4 4
+### 8500 RR 9 1 3 5
+### 8500 SI 16 2 2 5
+### 8500 RI 26 3 2 5 7
+### 9000 RI 10 1 4 5 7
+### 9000 SI 26 3 2 5
+### 9000 RR 16 2 2 5
+### 9000 ST 9 1 3 4
+### 9000 RR 4 0 4 6
+### 9000 ST 25 3 1 5
+### 9000 RR 15 2 1 7
+### 9000 SE 8 1 2 23
+### 9500 SE 15 2 1 23
+### 9500 RR 25 3 1 7
+### 9500 ST 4 0 4 5
+### 9500 RR 9 1 3 6
+### 9500 ST 16 2 2 4
+### 9500 RR 26 3 2 5
+### 9500 SI 10 1 4 5
+### 9500 RI 17 2 3 5 7
+### 10000 RI 27 3 3 5 7
+### 10000 SI 17 2 3 5
+### 10000 RR 10 1 4 5
+### 10000 ST 26 3 2 4
+### 10000 RR 16 2 2 6
+### 10000 ST 9 1 3 5
+### 10000 RR 4 0 4 7
+### 10000 SE 25 3 1 23
+### 10500 SE 4 0 4 23
+### 10500 RR 9 1 3 7
+### 10500 ST 16 2 2 5
+### 10500 RR 26 3 2 6
+### 10500 ST 10 1 4 4
+### 10500 RR 17 2 3 5
+### 10500 SI 27 3 3 5
+### 10500 RI 68 4 0 5 7
+### 11000 RI 18 2 4 5 7
+### 11000 SI 68 4 0 5
+### 11000 RR 27 3 3 5
+### 11000 ST 17 2 3 4
+### 11000 RR 10 1 4 6
+### 11000 ST 26 3 2 5
+### 11000 RR 16 2 2 7
+### 11000 SE 9 1 3 23
+### 11500 SE 16 2 2 23
+### 11500 RR 26 3 2 7
+### 11500 ST 10 1 4 5
+### 11500 RR 17 2 3 6
+### 11500 ST 27 3 3 4
+### 11500 RR 68 4 0 5
+### 11500 SI 18 2 4 5
+### 11500 RI 28 3 4 5 7
+### 12000 RI 69 4 1 5 7
+### 12000 SI 28 3 4 5
+### 12000 RR 18 2 4 5
+### 12000 ST 68 4 0 4
+### 12000 RR 27 3 3 6
+### 12000 ST 17 2 3 5
+### 12000 RR 10 1 4 7
+### 12000 SE 26 3 2 23
+### 12500 SE 10 1 4 23
+### 12500 RR 17 2 3 7
+### 12500 ST 27 3 3 5
+### 12500 RR 68 4 0 6
+### 12500 ST 18 2 4 4
+### 12500 RR 28 3 4 5
+### 12500 SI 69 4 1 5
+### 12500 RI 70 4 2 5 7
+### 13000 RI 71 4 3 5 7
+### 13000 SI 70 4 2 5
+### 13000 RR 69 4 1 5
+### 13000 ST 28 3 4 4
+### 13000 RR 18 2 4 6
+### 13000 ST 68 4 0 5
+### 13000 RR 27 3 3 7
+### 13000 SE 17 2 3 23
+### 13500 SE 27 3 3 23
+### 13500 RR 68 4 0 7
+### 13500 ST 18 2 4 5
+### 13500 RR 28 3 4 6
+### 13500 ST 69 4 1 4
+### 13500 RR 70 4 2 5
+### 13500 SI 71 4 3 5
+### 13500 RI 72 4 4 5 7
+### 14000 SI 72 4 4 5
+### 14000 RR 71 4 3 5
+### 14000 ST 70 4 2 4
+### 14000 RR 69 4 1 6
+### 14000 ST 28 3 4 5
+### 14000 RR 18 2 4 7
+### 14000 SE 68 4 0 23
+### 14500 SE 18 2 4 23
+### 14500 RR 28 3 4 7
+### 14500 ST 69 4 1 5
+### 14500 RR 70 4 2 6
+### 14500 ST 71 4 3 4
+### 14500 RR 72 4 4 5
+### 15000 ST 72 4 4 4
+### 15000 RR 71 4 3 6
+### 15000 ST 70 4 2 5
+### 15000 RR 69 4 1 7
+### 15000 SE 28 3 4 23
+### 15500 SE 69 4 1 23
+### 15500 RR 70 4 2 7
+### 15500 ST 71 4 3 5
+### 15500 RR 72 4 4 6
+### 16000 ST 72 4 4 5
+### 16000 RR 71 4 3 7
+### 16000 SE 70 4 2 23
+### 16500 SE 71 4 3 23
+### 16500 RR 72 4 4 7
+### 17000 SE 72 4 4 23
+Exiting @ tick 100000 because Network Tester completed simCycles

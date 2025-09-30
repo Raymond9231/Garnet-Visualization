@@ -1,33 +1,55 @@
 import argparse
 import subprocess
 import os
+
 script_dir = os.path.dirname(os.path.abspath(__file__))
-#print(script_dir)
+# print(script_dir)
 def run_gem5(args, output_file=os.path.join(script_dir, "output.txt")):
-    #print(output_file)
+    # print(output_file)
     cmd = [
-        "./build/NULL/gem5.debug", "configs/example/garnet_synth_traffic.py",
-        "--num-cpus", str(args.num_cpus),
-        "--num-dirs", str(args.num_dirs),
-        "--network", args.network,
-        "--topology", args.topology,
-        "--mesh-rows", str(args.mesh_rows),
-        "--router-latency", str(args.router_latency),
-        "--link-latency", str(args.link_latency),
-        "--vcs-per-vnet", str(args.vcs_per_vnet),
-        "--link-width-bits", str(args.link_width_bits),
-        "--sim-cycles", str(args.sim_cycles),
-        "--synthetic", args.synthetic,
-        "--injectionrate", str(args.injectionrate),
-        "--single-sender-id", str(args.single_sender_id),
-        "--single-dest-id", str(args.single_dest_id),
-        "--num-packets-max", str(args.num_packets_max),
-        "--inj-vnet", str(args.inj_vnet),
+        "./build/NULL/gem5.debug",
+        "configs/example/garnet_synth_traffic.py",
+        "--num-cpus",
+        str(args.num_cpus),
+        "--num-dirs",
+        str(args.num_dirs),
+        "--network",
+        args.network,
+        "--topology",
+        args.topology,
+        "--mesh-rows",
+        str(args.mesh_rows),
+        "--router-latency",
+        str(args.router_latency),
+        "--link-latency",
+        str(args.link_latency),
+        "--vcs-per-vnet",
+        str(args.vcs_per_vnet),
+        "--link-width-bits",
+        str(args.link_width_bits),
+        "--sim-cycles",
+        str(args.sim_cycles),
+        "--synthetic",
+        args.synthetic,
+        "--injectionrate",
+        str(args.injectionrate),
+        "--single-sender-id",
+        str(args.single_sender_id),
+        "--single-dest-id",
+        str(args.single_dest_id),
+        "--num-packets-max",
+        str(args.num_packets_max),
+        "--inj-vnet",
+        str(args.inj_vnet),
     ]
     with open(output_file, "w") as f:
         subprocess.run(cmd, stdout=f, stderr=subprocess.STDOUT)
 
-def parse_and_process(input_file=os.path.join(script_dir, "output.txt"), output_file=os.path.join(script_dir, "processed.txt")):
+
+def parse_and_process(
+    input_file=os.path.join(script_dir, "output.txt"),
+    output_file=os.path.join(script_dir, "processed.txt"),
+):
     with open(input_file) as f:
         logs = [line.strip() for line in f if line.startswith("###")]
 
@@ -86,8 +108,11 @@ def parse_and_process(input_file=os.path.join(script_dir, "output.txt"), output_
     with open(output_file, "w") as f:
         f.write("\n".join(result_lines) + "\n")
 
+
 def get_arg_parser():
-    parser = argparse.ArgumentParser(description="Run Garnet gem5 and process logs")
+    parser = argparse.ArgumentParser(
+        description="Run Garnet gem5 and process logs"
+    )
     # System config
     parser.add_argument("--num-cpus", type=int, default=16)
     parser.add_argument("--num-dirs", type=int, default=16)
@@ -100,15 +125,16 @@ def get_arg_parser():
     parser.add_argument("--vcs-per-vnet", type=int, default=4)
     parser.add_argument("--link-width-bits", type=int, default=128)
     # Traffic
-    parser.add_argument("--sim-cycles", type=int, default=10000)
+    parser.add_argument("--sim-cycles", type=int, default=100000)
     parser.add_argument("--synthetic", type=str, default="uniform_random")
     parser.add_argument("--injectionrate", type=float, default=1.0)
     parser.add_argument("--single-sender-id", type=int, default=5)
     parser.add_argument("--single-dest-id", type=int, default=7)
-    parser.add_argument("--num-packets-max", type=int, default=1)
-    parser.add_argument("--inj-vnet", type=int, default=0)
+    parser.add_argument("--num-packets-max", type=int, default=5)
+    parser.add_argument("--inj-vnet", type=int, default=2)
 
     return parser
+
 
 if __name__ == "__main__":
     parser = get_arg_parser()
