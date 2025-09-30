@@ -87,7 +87,12 @@ InputUnit::wakeup()
         DPRINTF(RubyNetwork, "Router[%d] Consuming:%s Width: %d Flit:%s\n",
         m_router->get_id(), m_in_link->name(),
         m_router->getBitWidth(), *t_flit);
-
+        printf("### %ld RR %d %d %d %d\n",
+            curTick(),
+            t_flit->get_global_id(),
+            t_flit->getPacketID(),
+            t_flit->get_id(),
+            m_router->get_id());
         // flit_log << "Tick:" << curTick()
         //     << " Action:" << "Input_unit"
         //     << " FlitID:" << t_flit->get_id()

@@ -1,0 +1,44 @@
+Global frequency set at 1000000000000 ticks per second
+build/NULL/mem/dram_interface.cc:690: warn: DRAM device capacity (8192 Mbytes) does not match the address range assigned (32 Mbytes)
+build/NULL/mem/dram_interface.cc:690: warn: DRAM device capacity (8192 Mbytes) does not match the address range assigned (32 Mbytes)
+build/NULL/mem/dram_interface.cc:690: warn: DRAM device capacity (8192 Mbytes) does not match the address range assigned (32 Mbytes)
+build/NULL/mem/dram_interface.cc:690: warn: DRAM device capacity (8192 Mbytes) does not match the address range assigned (32 Mbytes)
+build/NULL/mem/dram_interface.cc:690: warn: DRAM device capacity (8192 Mbytes) does not match the address range assigned (32 Mbytes)
+build/NULL/mem/dram_interface.cc:690: warn: DRAM device capacity (8192 Mbytes) does not match the address range assigned (32 Mbytes)
+build/NULL/mem/dram_interface.cc:690: warn: DRAM device capacity (8192 Mbytes) does not match the address range assigned (32 Mbytes)
+build/NULL/mem/dram_interface.cc:690: warn: DRAM device capacity (8192 Mbytes) does not match the address range assigned (32 Mbytes)
+build/NULL/mem/dram_interface.cc:690: warn: DRAM device capacity (8192 Mbytes) does not match the address range assigned (32 Mbytes)
+build/NULL/mem/dram_interface.cc:690: warn: DRAM device capacity (8192 Mbytes) does not match the address range assigned (32 Mbytes)
+build/NULL/mem/dram_interface.cc:690: warn: DRAM device capacity (8192 Mbytes) does not match the address range assigned (32 Mbytes)
+build/NULL/mem/dram_interface.cc:690: warn: DRAM device capacity (8192 Mbytes) does not match the address range assigned (32 Mbytes)
+build/NULL/mem/dram_interface.cc:690: warn: DRAM device capacity (8192 Mbytes) does not match the address range assigned (32 Mbytes)
+build/NULL/mem/dram_interface.cc:690: warn: DRAM device capacity (8192 Mbytes) does not match the address range assigned (32 Mbytes)
+build/NULL/mem/dram_interface.cc:690: warn: DRAM device capacity (8192 Mbytes) does not match the address range assigned (32 Mbytes)
+build/NULL/mem/dram_interface.cc:690: warn: DRAM device capacity (8192 Mbytes) does not match the address range assigned (32 Mbytes)
+build/NULL/base/statistics.hh:280: warn: One of the stats is a legacy stat. Legacy stat is a stat that does not belong to any statistics::Group. Legacy stat is deprecated.
+build/NULL/base/statistics.hh:280: warn: One of the stats is a legacy stat. Legacy stat is a stat that does not belong to any statistics::Group. Legacy stat is deprecated.
+build/NULL/base/statistics.hh:280: warn: One of the stats is a legacy stat. Legacy stat is a stat that does not belong to any statistics::Group. Legacy stat is deprecated.
+build/NULL/base/statistics.hh:280: warn: One of the stats is a legacy stat. Legacy stat is a stat that does not belong to any statistics::Group. Legacy stat is deprecated.
+build/NULL/mem/ruby/network/garnet/GarnetNetwork.cc:110: info: Garnet version 3.0
+gem5 Simulator System.  https://www.gem5.org
+gem5 is copyrighted software; use the --copyright option for details.
+
+gem5 version 22.1.0.0
+gem5 compiled Sep 29 2025 22:25:34
+gem5 started Sep 29 2025 23:38:32
+gem5 executing on MSI, pid 90643
+command line: ./build/NULL/gem5.debug configs/example/garnet_synth_traffic.py --num-cpus 16 --num-dirs 16 --network garnet --topology Mesh_XY --mesh-rows 4 --router-latency 1 --link-latency 1 --vcs-per-vnet 4 --link-width-bits 128 --sim-cycles 10000 --synthetic uniform_random --injectionrate 1.0 --single-sender-id 5 --single-dest-id 7 --num-packets-max 1 --inj-vnet 0
+
+Instantiate start!
+Simulation Start!
+build/NULL/sim/simulate.cc:192: info: Entering event queue @ 0.  Starting simulation...
+build/NULL/mem/ruby/system/Sequencer.cc:613: warn: Replacement policy updates recently became the responsibility of SLICC state machines. Make sure to setMRU() near callbacks in .sm files!
+### 1500 RI 0 0 0 5 7
+### 2000 SI 0 0 0 5
+### 2500 RR 0 0 0 5
+### 3000 ST 0 0 0 4
+### 3500 RR 0 0 0 6
+### 4000 ST 0 0 0 5
+### 4500 RR 0 0 0 7
+### 5000 SE 0 0 0 23
+Exiting @ tick 10000 because Network Tester completed simCycles

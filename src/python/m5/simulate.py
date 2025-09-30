@@ -67,6 +67,7 @@ _instantiated = False  # Has m5.instantiate() been called?
 # The final call to instantiate the SimObject graph and initialize the
 # system.
 def instantiate(ckpt_dir=None):
+    print("Instantiate start!")
     global _instantiated
     from m5 import options
 
@@ -174,7 +175,7 @@ def simulate(*args, **kwargs):
 
     if not _instantiated:
         fatal("m5.instantiate() must be called before m5.simulate().")
-
+    print("Simulation Start!")
     if need_startup:
         root = objects.Root.getInstance()
         for obj in root.descendants():

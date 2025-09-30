@@ -61,13 +61,6 @@ NetworkInterface::NetworkInterface(const Params &p)
     m_deadlock_threshold(p.garnet_deadlock_threshold),
     vc_busy_counter(m_virtual_networks, 0)
 {
-    if (!flit_log.is_open()) {
-    flit_log.open("m5out/flit_trace.txt", std::ios::out);
-    if (!flit_log.is_open()) {
-        panic("NetworkInterface: could not open m5out/
-            flit_trace.txt for writing\n");
-    }
-    }
     m_stall_count.resize(m_virtual_networks);
     niOutVcs.resize(0);
 }
@@ -630,6 +623,14 @@ NetworkInterface::scheduleFlit(flit *t_flit)
         *t_flit, *(t_flit->get_msg_ptr()));
         oPort->outFlitQueue()->insert(t_flit);
         oPort->outNetLink()->scheduleEventAbsolute(clockEdge(Cycles(1)));
+
+        printf("### %ld RI %d %d %d %d %d\n",
+            curTick(),
+            t_flit->get_global_id(),
+            t_flit->getPacketID(),
+            t_flit->get_id(),
+            t_flit->get_route().src_router,
+            t_flit->get_route().dest_router);
         return;
     }
 

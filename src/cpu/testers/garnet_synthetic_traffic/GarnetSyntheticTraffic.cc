@@ -286,7 +286,6 @@ GarnetSyntheticTraffic::generatePkt()
     // Vnet 0 and 1 are for control packets (1-flit)
     // Vnet 2 is for data packets (5-flit)
     int injReqType = injVnet;
-    injReqType = 0;
     if (injReqType < 0 || injReqType > 2)
     {
         // randomly inject in any vnet

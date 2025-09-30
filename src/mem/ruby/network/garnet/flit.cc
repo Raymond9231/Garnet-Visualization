@@ -32,6 +32,7 @@
 
 #include "base/intmath.hh"
 #include "debug/RubyNetwork.hh"
+#include <string>
 
 namespace gem5
 {
@@ -41,7 +42,7 @@ namespace ruby
 
 namespace garnet
 {
-
+int flit::next_id = 0;
 // Constructor for the flit
 flit::flit(int packet_id, int id, int  vc, int vnet, RouteInfo route, int size,
     MsgPtr msg_ptr, int MsgSize, uint32_t bWidth, Tick curTime)
@@ -51,7 +52,7 @@ flit::flit(int packet_id, int id, int  vc, int vnet, RouteInfo route, int size,
     m_enqueue_time = curTime;
     m_dequeue_time = curTime;
     m_time = curTime;
-    m_packet_id = id;
+    m_packet_id = packet_id;
     m_id = id;
     m_vnet = vnet;
     m_vc = vc;
@@ -60,7 +61,9 @@ flit::flit(int packet_id, int id, int  vc, int vnet, RouteInfo route, int size,
     m_stage.second = curTime;
     m_width = bWidth;
     msgSize = MsgSize;
-
+    global_id = next_id;
+    next_id+=1;
+    //printf("We have a new flit now, with global id %d\n", global_id);
     if (size == 1) {
         m_type = HEAD_TAIL_;
         return;
@@ -112,6 +115,7 @@ flit::print(std::ostream& out) const
     out << "[flit:: ";
     out << "PacketId=" << m_packet_id << " ";
     out << "Id=" << m_id << " ";
+    out << "GlobalId=" << global_id << " ";
     out << "Type=" << m_type << " ";
     out << "Size=" << m_size << " ";
     out << "Vnet=" << m_vnet << " ";

@@ -36,6 +36,8 @@
 #include "debug/RubyNetwork.hh"
 #include "mem/ruby/network/garnet/CreditLink.hh"
 
+#include <string>
+using namespace std;
 namespace gem5
 {
 
@@ -84,12 +86,45 @@ NetworkLink::wakeup()
 {
     DPRINTF(RubyNetwork, "Woke up to transfer flits from %s\n",
         src_object->name());
+    string s =this->name().c_str();
     assert(link_srcQueue != nullptr);
     assert(curTick() == clockEdge());
     if (link_srcQueue->isReady(curTick())) {
         flit *t_flit = link_srcQueue->getTopFlit();
         DPRINTF(RubyNetwork, "Transmission will finish at %ld :%s\n",
                 clockEdge(m_latency), *t_flit);
+        if (s.find("ext_links") != std::string::npos) {
+            auto pos = s.find("network_links");
+            auto pos1 = s.find("ext_links");
+            if (pos != std::string::npos) {
+                // 提取 network_links 后面的数字
+                std::string number = s.substr(pos + std::string("network_links").size());
+                std::string linkid = s.substr(pos1 + std::string("ext_links").size());
+                if (!number.empty()) {
+                    int val = std::stoi(number);
+                    int id = std::stoi(linkid);
+                    if(val==0) {
+                        printf("### %ld SI %d %d %d %d\n",
+                            curTick(), t_flit->get_global_id(),
+                            t_flit->getPacketID(),
+                            t_flit->get_id(), id);
+                    } else {
+                        printf("### %ld SE %d %d %d %d\n",
+                            curTick(), t_flit->get_global_id(),
+                            t_flit->getPacketID(),
+                            t_flit->get_id(), id);
+                    }
+                }
+            }
+        } else if (s.find("int_links") != std::string::npos &&s.find("network_link") != std::string::npos){
+            auto pos = s.find("int_links");
+            std::string number = s.substr(pos + std::string("int_links").size());
+            int val = std::stoi(number);
+            printf("### %ld ST %d %d %d %d\n",
+                curTick(), t_flit->get_global_id(),
+                t_flit->getPacketID(),
+                t_flit->get_id(), val);
+        }
         if (m_type != NUM_LINK_TYPES_) {
             // Only for assertions and debug messages
             assert(t_flit->m_width == bitWidth);
