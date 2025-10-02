@@ -128,10 +128,10 @@ def get_arg_parser():
     parser.add_argument("--sim-cycles", type=int, default=100000)
     parser.add_argument("--synthetic", type=str, default="uniform_random")
     parser.add_argument("--injectionrate", type=float, default=1.0)
-    parser.add_argument("--single-sender-id", type=int, default=5)
-    parser.add_argument("--single-dest-id", type=int, default=7)
-    parser.add_argument("--num-packets-max", type=int, default=5)
-    parser.add_argument("--inj-vnet", type=int, default=2)
+    parser.add_argument("--single-sender-id", type=int, default=10)
+    parser.add_argument("--single-dest-id", type=int, default=12)
+    parser.add_argument("--num-packets-max", type=int, default=1)
+    parser.add_argument("--inj-vnet", type=int, default=0)
 
     return parser
 

@@ -134,20 +134,56 @@ def build_mesh_xy(n):
     routers: {id: (x,y)}
     links: {lid: (src,dst)}
     """
-    routers = {r: (r % n, r // n) for r in range(n*n)}
+    routers = {r: (r // n, r % n) for r in range(n*n)}
     links = {}
     lid = 0
-    for y in range(n):
-        for x in range(n):
-            r = y*n + x
-            # east
-            if x < n-1:
-                links[lid] = (r, r+1)
-                lid += 1
-            # south
-            if y < n-1:
-                links[lid] = (r, r+n)
-                lid += 1
+    link_count=0
+    # East output to West input links (weight = 1)
+    for row in range(n):
+        for col in range(n):
+            if col + 1 < n:
+                east_out = col + (row * n)
+                west_in = (col + 1) + (row * n)
+                links[link_count]=(east_out,west_in)
+                link_count += 1
+
+    # West output to East input links (weight = 1)
+    for row in range(n):
+        for col in range(n):
+            if col + 1 < n:
+                east_in = col + (row * n)
+                west_out = (col + 1) + (row * n)
+                links[link_count]=(west_out,east_in)
+                link_count += 1
+
+    # North output to South input links (weight = 2)
+    for col in range(n):
+        for row in range(n):
+            if row + 1 < n:
+                north_out = col + (row * n)
+                south_in = col + ((row + 1) * n)
+                links[link_count]=(north_out,south_in)
+                link_count += 1
+
+    # South output to North input links (weight = 2)
+    for col in range(n):
+        for row in range(n):
+            if row + 1 < n:
+                north_in = col + (row * n)
+                south_out = col + ((row + 1) * n)
+                links[link_count]=(south_out,north_in)
+                link_count += 1
+    # for y in range(n):
+    #     for x in range(n):
+    #         r = y*n + x
+    #         # east
+    #         if x < n-1:
+    #             links[lid] = (r, r+1)
+    #             lid += 1
+    #         # south
+    #         if y < n-1:
+    #             links[lid] = (r, r+n)
+    #             lid += 1
     return routers, links
 
 # ========== Step 3. Generate Plotly animation ==========
@@ -194,6 +230,10 @@ def make_animation(snapshots, routers, links, interval=250):
             
             # Get flits on this link
             flits = snap["links"].get(lid, [])
+            if a > b:
+                flits1 = snap["links"].get(lid-12,[])
+            else:
+                flits1 = snap["links"].get(lid+12,[])
             
             # Link hover text
             if flits:
@@ -206,7 +246,12 @@ def make_animation(snapshots, routers, links, interval=250):
             
             # Link width based on flit count
             line_width = max(2, len(flits) * 2)
-            line_color = "red" if len(flits) > 0 else "lightgray"
+            
+            flag = len(flits1) > 0 or len(flits) > 0
+            
+            line_color = "red" if flag else "lightgray"
+            
+            #line_color = "red" if len(flits) > 0 else "lightgray"
             
             link_traces.append(
                 go.Scatter(
