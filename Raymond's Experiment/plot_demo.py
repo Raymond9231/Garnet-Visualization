@@ -210,6 +210,7 @@ def make_animation(snapshots, routers, links, interval=250):
         xs = [routers[r][0] for r in routers]
         ys = [routers[r][1] for r in routers]
         sizes = [len(snap["routers"].get(r, []))*5+10 for r in routers]
+        colors = ["green" if len(snap["routers"].get(r, [])) > 0 else "steelblue" for r in routers]
         
         hover_texts = []
         for r in routers:
@@ -267,7 +268,7 @@ def make_animation(snapshots, routers, links, interval=250):
         frames.append(go.Frame(
             data=link_traces + [
                 go.Scatter(x=xs, y=ys, mode="markers",
-                           marker=dict(size=sizes, color="steelblue", 
+                           marker=dict(size=sizes, color=colors, 
                                      line=dict(width=2, color="darkblue")),
                            text=hover_texts,
                            hoverinfo="text",

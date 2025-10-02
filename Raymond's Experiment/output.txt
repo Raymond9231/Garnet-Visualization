@@ -25,9 +25,9 @@ gem5 is copyrighted software; use the --copyright option for details.
 
 gem5 version 22.1.0.0
 gem5 compiled Sep 29 2025 22:25:34
-gem5 started Oct  1 2025 20:53:31
-gem5 executing on MSI, pid 18958
-command line: ./build/NULL/gem5.debug configs/example/garnet_synth_traffic.py --num-cpus 16 --num-dirs 16 --network garnet --topology Mesh_XY --mesh-rows 4 --router-latency 1 --link-latency 1 --vcs-per-vnet 4 --link-width-bits 128 --sim-cycles 100000 --synthetic uniform_random --injectionrate 1.0 --single-sender-id 10 --single-dest-id 12 --num-packets-max 1 --inj-vnet 0
+gem5 started Oct  1 2025 21:27:40
+gem5 executing on MSI, pid 26407
+command line: ./build/NULL/gem5.debug configs/example/garnet_synth_traffic.py --num-cpus 16 --num-dirs 16 --network garnet --topology Mesh_XY --mesh-rows 4 --router-latency 1 --link-latency 1 --vcs-per-vnet 4 --link-width-bits 128 --sim-cycles 100000 --synthetic uniform_random --injectionrate 1.0 --single-sender-id 10 --single-dest-id 12 --num-packets-max 2 --inj-vnet 0
 
 Instantiate start!
 Simulation Start!
@@ -36,11 +36,21 @@ build/NULL/mem/ruby/system/Sequencer.cc:613: warn: Replacement policy updates re
 ### 1500 RI 0 0 0 10 12
 ### 2000 SI 0 0 0 10
 ### 2500 RR 0 0 0 10
+### 2500 RI 2 1 0 10 12
+### 3000 SI 2 1 0 10
 ### 3000 ST 0 0 0 19
 ### 3500 RR 0 0 0 9
+### 3500 RR 2 1 0 10
+### 4000 ST 2 1 0 19
 ### 4000 ST 0 0 0 18
 ### 4500 RR 0 0 0 8
+### 4500 RR 2 1 0 9
+### 5000 ST 2 1 0 18
 ### 5000 ST 0 0 0 26
 ### 5500 RR 0 0 0 12
+### 5500 RR 2 1 0 8
+### 6000 ST 2 1 0 26
 ### 6000 SE 0 0 0 28
+### 6500 RR 2 1 0 12
+### 7000 SE 2 1 0 28
 Exiting @ tick 100000 because Network Tester completed simCycles

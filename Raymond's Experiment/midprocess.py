@@ -130,7 +130,7 @@ def get_arg_parser():
     parser.add_argument("--injectionrate", type=float, default=1.0)
     parser.add_argument("--single-sender-id", type=int, default=10)
     parser.add_argument("--single-dest-id", type=int, default=12)
-    parser.add_argument("--num-packets-max", type=int, default=1)
+    parser.add_argument("--num-packets-max", type=int, default=2)
     parser.add_argument("--inj-vnet", type=int, default=0)
 
     return parser
